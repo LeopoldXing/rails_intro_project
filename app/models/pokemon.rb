@@ -9,4 +9,5 @@ class Pokemon < ApplicationRecord
   has_many :items, through: :pokemon_items
 
   validates :name, presence: true, uniqueness: true
+  validates :type1, presence: true
 end
