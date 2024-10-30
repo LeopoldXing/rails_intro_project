@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: MyString
+  base_experience: 1
+  height: 1
+  weight: 1
+  is_default: false
+  order_num: 1
+  type1: MyString
+  type2: MyString
+
+two:
+  id: 1
+  name: MyString
+  base_experience: 1
+  height: 1
+  weight: 1
+  is_default: false
+  order_num: 1
+  type1: MyString
+  type2: MyString
