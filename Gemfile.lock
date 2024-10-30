@@ -153,6 +153,7 @@ GEM
       racc
     pg (1.5.9)
     pg (1.5.9-x64-mingw-ucrt)
+    poke-api-v2 (0.1.1)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -289,6 +290,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   pg (~> 1.1)
+  poke-api-v2
   puma (>= 5.0)
   rails (~> 7.2.1)
   rubocop-rails-omakase
