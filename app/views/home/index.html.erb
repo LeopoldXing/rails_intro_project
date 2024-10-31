@@ -1,6 +1,72 @@
 <section class="mt-12">
   <h1 class="mb-8 text-2xl font-bold tracking-tight text-gray-900 sm:text-6xl">Pokémon</h1>
 
+  <!-- search bar -->
+  <div class="mb-8 w-full">
+    <form action="<%= pokemon_index_path %>" method="get">
+      <!-- search bar -->
+      <div class="w-full flex items-center gap-4">
+        <input type="text" name="keyword" placeholder="Search Pokémon by name..."
+               class="block w-full p-2 text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        <button type="submit"
+                class="inline-flex items-center px-4 py-2 text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          Search
+        </button>
+      </div>
+    </form>
+    <!-- condition -->
+    <div class="flex-col justify-center items-center border-b border-gray-200">
+      <div class="w-full py-4 flex items-center justify-start">
+        <!-- ability -->
+        <div class="mx-4 pr-4 relative inline-block text-left border-r border-gray-200">
+          <%= render_dropdown_menu do %>
+            <%= dropdown_menu_trigger do %>
+              <%= render_button "Ability", variant: :ghost %>
+            <% end %>
+
+            <%= dropdown_menu_content do %>
+              <%= dropdown_menu_label "Ability" %>
+              <%= render_separator class: "my-1" %>
+              <%= dropdown_menu_item "ability 1" %>
+              <%= dropdown_menu_item "ability 2" %>
+            <% end %>
+          <% end %>
+        </div>
+        <!-- item -->
+        <div class="mr-4 pr-4 relative inline-block text-left border-r border-gray-200">
+          <%= render_dropdown_menu do %>
+            <%= dropdown_menu_trigger do %>
+              <%= render_button "Item", variant: :ghost %>
+            <% end %>
+
+            <%= dropdown_menu_content do %>
+              <%= dropdown_menu_label "Item" %>
+              <%= render_separator class: "my-1" %>
+              <%= dropdown_menu_item "item 1" %>
+              <%= dropdown_menu_item "item 2" %>
+            <% end %>
+          <% end %>
+        </div>
+        <!-- move -->
+        <div class="relative inline-block text-left">
+          <%= render_dropdown_menu do %>
+            <%= dropdown_menu_trigger do %>
+              <%= render_button "Move", variant: :ghost %>
+            <% end %>
+
+            <%= dropdown_menu_content do %>
+              <%= dropdown_menu_label "Move" %>
+              <%= render_separator class: "my-1" %>
+              <%= dropdown_menu_item "move 1" %>
+              <%= dropdown_menu_item "move 2" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <% if @pokemons.any? %>
     <!-- table head -->
     <div class="mt-4 w-full grid grid-cols-9 font-semibold border-b border-gray-300 py-2">
@@ -14,6 +80,7 @@
       <div>Primary Type</div>
       <div>Secondary Type</div>
     </div>
+    <!-- table content -->
     <ul class="grid gap-4 mt-4">
       <% @pokemons.each do |pokemon| %>
         <li class="w-full grid grid-cols-9 items-center border-b border-gray-200 py-2">

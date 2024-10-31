@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "pokemon/:id", to: "pokemon#show", as: :pokemon
+  resources :pokemon, only: [:index, :show]
   get "items/index"
   get "items/:id", to: "items#show", as: :item
   get "moves/index"

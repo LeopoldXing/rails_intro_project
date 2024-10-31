@@ -20,4 +20,8 @@ module Components::DropdownMenuHelper
     content = (label || capture(&block))
     render "components/ui/shared/menu_item", content: content
   end
+
+  def render_separator(options = {})
+    content_tag(:div, "", class: "separator #{options[:class]}")
+  end
 end
