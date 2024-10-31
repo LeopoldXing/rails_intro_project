@@ -1,4 +1,35 @@
-<div>
-  <h1 class="font-bold text-4xl">Abilities#show</h1>
-  <p>Find me in app/views/abilities/show.html.erb</p>
-</div>
+<section class="mt-12 w-full">
+  <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-6xl"><%= @ability.name %></h1>
+  <% if @ability.present? %>
+    <!-- Ability Details -->
+    <div class="mt-12">
+      <p><strong>ID:</strong> <%= @ability.id %></p>
+      <p><strong>Name:</strong> <%= @ability.name %></p>
+    </div>
+
+    <!-- Pokémon with this Ability -->
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-gray-800">Pokémon with this Ability</h2>
+
+      <% if @ability.pokemons.any? %>
+        <!-- table head -->
+        <div class="mt-4 w-full flex items-center justify-start font-semibold border-b border-gray-300">
+          <div class="mr-10">ID</div>
+          <div>Name</div>
+        </div>
+        <ul class="grid mt-4">
+          <% @ability.pokemons.each do |pokemon| %>
+            <li class="w-full mb-4 flex items-center justify-start">
+              <div class="mr-10"><%= pokemon.id %></div>
+              <div><%= link_to pokemon.name, pokemon_path(pokemon), class: "text-blue-500 hover:underline" %></div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-600 mt-4">No Pokémon has this ability.</p>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-600">Ability not found.</p>
+  <% end %>
+</section>
