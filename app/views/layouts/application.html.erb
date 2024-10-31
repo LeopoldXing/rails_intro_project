@@ -21,6 +21,37 @@
 <body>
 <!--  wrapper  -->
 <main class="mx-auto w-full max-w-screen-xl px-2.5 md:px-20">
+  <!-- Navbar -->
+  <div class="bg-white sticky z-50 top-0 inset-x-0 h-16">
+    <header class="w-full relative bg-white">
+      <!-- navbar -->
+      <div class="flex items-center justify-between border-b border-gray-200">
+        <!-- Logo -->
+        <div class="flex h-16 items-center text-2xl font-bold">
+          <%= link_to "Pokémon WiKi", root_path %>
+        </div>
+        <!-- category menu -->
+        <div class="flex items-center justify-center gap-6">
+          <div class="flex h-16 items-center text-lg font-bold">
+            <%= link_to "Pokémon", root_path %>
+          </div>
+          <div class="flex h-16 items-center text-lg font-bold">
+            <%= link_to "Abilities" %>
+          </div>
+          <div class="flex h-16 items-center text-lg font-bold">
+            <%= link_to "Moves" %>
+          </div>
+          <div class="flex h-16 items-center text-lg font-bold">
+            <%= link_to "Items" %>
+          </div>
+          <div class="flex h-16 items-center text-lg font-bold">
+            <%= link_to "About", about_path %>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
   <%= yield %>
 </main>
 </body>
