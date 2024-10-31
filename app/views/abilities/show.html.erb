@@ -12,19 +12,7 @@
       <h2 class="text-xl font-semibold text-gray-800">Pokémon with this Ability</h2>
 
       <% if @ability.pokemons.any? %>
-        <!-- table head -->
-        <div class="mt-4 w-full flex items-center justify-start font-semibold border-b border-gray-300">
-          <div class="mr-10">ID</div>
-          <div>Name</div>
-        </div>
-        <ul class="grid mt-4">
-          <% @ability.pokemons.each do |pokemon| %>
-            <li class="w-full mb-4 flex items-center justify-start">
-              <div class="mr-10"><%= pokemon.id %></div>
-              <div><%= link_to pokemon.name, pokemon_path(pokemon), class: "text-blue-500 hover:underline" %></div>
-            </li>
-          <% end %>
-        </ul>
+        <%= render "shared/pokemon_list", pokemons: @ability.pokemons %>
       <% else %>
         <p class="text-gray-600 mt-4">No Pokémon has this ability.</p>
       <% end %>

@@ -1,0 +1,18 @@
+<!-- table head -->
+<div class="mt-4 w-full grid grid-cols-4 font-semibold border-b border-gray-300 py-2">
+  <div>ID</div>
+  <div>Name</div>
+  <div>Base Experience</div>
+  <div>Primary Type</div>
+</div>
+
+<ul class="grid gap-4 mt-4">
+  <% pokemons.each do |pokemon| %>
+    <li class="w-full grid grid-cols-4 items-center border-b border-gray-200 py-2">
+      <div><%= pokemon.id %></div>
+      <div><%= link_to pokemon.name, pokemon_path(pokemon), class: "text-blue-500 hover:underline" %></div>
+      <div><%= pokemon.base_experience %></div>
+      <div><%= pokemon.type1 %></div>
+    </li>
+  <% end %>
+</ul>

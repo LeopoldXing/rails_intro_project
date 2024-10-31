@@ -3,7 +3,7 @@
   <!-- abilities list -->
   <% if @moves.any? %>
     <!-- table head -->
-    <div class="mb-4 w-full grid grid-cols-5 font-semibold border-b border-gray-300 py-2">
+    <div class="mt-4 w-full grid grid-cols-5 font-semibold border-b border-gray-300 py-2">
       <div>ID</div>
       <div>Name</div>
       <div>PP</div>
@@ -11,7 +11,7 @@
       <div>Move Type</div>
     </div>
     <!-- table content -->
-    <div class="grid gap-4">
+    <div class="grid gap-4 mt-4">
       <% @moves.each do |move| %>
         <div class="w-full grid grid-cols-5 items-center border-b border-gray-200 py-2">
           <div><%= move.id %></div>

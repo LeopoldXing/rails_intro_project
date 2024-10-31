@@ -1,4 +1,100 @@
-<div>
-  <h1 class="font-bold text-4xl">Pokemon#show</h1>
-  <p>Find me in app/views/pokemon/show.html.erb</p>
-</div>
+<section class="mt-12 w-full">
+  <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-6xl"><%= @pokemon.name %></h1>
+  <% if @pokemon.present? %>
+    <!-- Pokemon Details -->
+    <div class="mt-12">
+      <p><strong>ID:</strong> <%= @pokemon.id %></p>
+      <p><strong>Name:</strong> <%= @pokemon.name %></p>
+      <p><strong>Base Experience:</strong> <%= @pokemon.base_experience %></p>
+      <p><strong>Height:</strong> <%= @pokemon.height %></p>
+      <p><strong>Weight:</strong> <%= @pokemon.weight %></p>
+      <p><strong>Default State:</strong> <%= @pokemon.is_default %></p>
+      <p><strong>Order:</strong> <%= @pokemon.order_num %></p>
+      <p><strong>Primary Type:</strong> <%= @pokemon.type1 %></p>
+      <p><strong>Secondary Type:</strong> <%= @pokemon.type2 %></p>
+    </div>
+
+    <!-- Pokémon's Items -->
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-gray-800"><%= @pokemon.name %>'s Items</h2>
+
+      <% if @pokemon.items.any? %>
+        <!-- table head -->
+        <div class="mb-4 w-full grid grid-cols-4 font-semibold border-b border-gray-300 py-2">
+          <div>ID</div>
+          <div>Name</div>
+          <div>Cost</div>
+          <div>Fling Power</div>
+        </div>
+        <!-- table content -->
+        <ul class="grid gap-4">
+          <% @pokemon.items.each do |item| %>
+            <div class="w-full grid grid-cols-4 items-center border-b border-gray-200 py-2">
+              <div><%= item.id %></div>
+              <div><%= link_to item.name, item_path(item), class: "text-blue-500 hover:underline" %></div>
+              <div><%= item.cost %></div>
+              <div><%= item.fling_power %></div>
+            </div>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-600 mt-4"><%= @pokemon.name %> doesn't have any items.</p>
+      <% end %>
+    </div>
+
+    <!-- Pokémon's Abilities -->
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-gray-800"><%= @pokemon.name %>'s Abilities</h2>
+
+      <% if @pokemon.abilities.any? %>
+        <!-- table head -->
+        <div class="mt-4 w-full grid grid-cols-2 font-semibold border-b border-gray-300 py-2">
+          <div>ID</div>
+          <div>Name</div>
+        </div>
+        <ul class="grid gap-4 mt-4">
+          <% @pokemon.abilities.each do |ability| %>
+            <li class="w-full grid grid-cols-2 items-center border-b border-gray-200 py-2">
+              <div><%= ability.id %></div>
+              <div><%= link_to ability.name, ability_path(ability), class: "text-blue-500 hover:underline" %></div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-600 mt-4"><%= @pokemon.name %> doesn't have any abilities.</p>
+      <% end %>
+    </div>
+
+    <!-- Pokémon's Moves -->
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-gray-800"><%= @pokemon.name %>'s Moves</h2>
+
+      <% if @pokemon.moves.any? %>
+        <!-- table head -->
+        <div class="mt-4 w-full grid grid-cols-5 font-semibold border-b border-gray-300 py-2">
+          <div>ID</div>
+          <div>Name</div>
+          <div>PP</div>
+          <div>Priority</div>
+          <div>Move Type</div>
+        </div>
+        <!-- table content -->
+        <ul class="grid gap-4 mt-4">
+          <% @pokemon.moves.each do |move| %>
+            <div class="w-full grid grid-cols-5 items-center border-b border-gray-200 py-2">
+              <div><%= move.id %></div>
+              <div><%= link_to move.name, move_path(move), class: "text-blue-500 hover:underline" %></div>
+              <div><%= move.pp %></div>
+              <div><%= move.priority %></div>
+              <div><%= move.move_type %></div>
+            </div>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-600 mt-4"><%= @pokemon.name %> doesn't have any moves.</p>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-600">Pokémon <%= @pokemon.name %> not found.</p>
+  <% end %>
+</section>
