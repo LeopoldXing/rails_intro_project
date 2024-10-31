@@ -42,3 +42,5 @@ bower.json
 
 # vim
 *.sw*
+/app/assets/builds/*
+!/app/assets/builds/.keep
