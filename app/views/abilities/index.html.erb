@@ -3,16 +3,16 @@
   <!-- abilities list -->
   <% if @abilities.any? %>
     <!-- table head -->
-    <div class="mb-4 w-full flex items-center justify-start font-semibold border-b border-gray-300">
-      <div class="mr-10">ID</div>
+    <div class="mb-4 w-full grid grid-cols-2 font-semibold border-b border-gray-300 py-2">
+      <div>ID</div>
       <div>Name</div>
     </div>
     <!-- table content -->
-    <div class="grid">
-      <% @abilities.each do |ability, index| %>
-        <div class="w-full mb-4 flex items-center justify-start">
-          <div class="mr-10"><%= ability.id %></div>
-          <div><%= link_to ability.name, ability_path(ability) %></div>
+    <div class="grid gap-4">
+      <% @abilities.each do |ability| %>
+        <div class="w-full grid grid-cols-2 items-center border-b border-gray-200 py-2">
+          <div><%= ability.id %></div>
+          <div><%= link_to ability.name, ability_path(ability), class: "text-blue-500 hover:underline" %></div>
         </div>
       <% end %>
     </div>

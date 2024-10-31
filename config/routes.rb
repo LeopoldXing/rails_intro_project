@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "items/index"
   get "items/:id", to: "items#show", as: :item
   get "moves/index"
-  get "moves/show"
+  get "moves/:id", to: "moves#show", as: :move
   get "abilities/index"
   get "abilities/:id", to: "abilities#show", as: :ability
   root "home#index"

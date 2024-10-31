@@ -1,4 +1,38 @@
-<div>
-  <h1 class="font-bold text-4xl">Moves#show</h1>
-  <p>Find me in app/views/moves/show.html.erb</p>
-</div>
+<section class="mt-12 w-full">
+  <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-6xl"><%= @move.name %></h1>
+  <% if @move.present? %>
+    <!-- Ability Details -->
+    <div class="mt-12">
+      <p><strong>ID:</strong> <%= @move.id %></p>
+      <p><strong>Name:</strong> <%= @move.name %></p>
+      <p><strong>PP:</strong> <%= @move.pp %></p>
+      <p><strong>Priority:</strong> <%= @move.priority %></p>
+      <p><strong>Move Type:</strong> <%= @move.move_type %></p>
+    </div>
+
+    <!-- Pokémon with this Ability -->
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold text-gray-800">Pokémon who can make this move:</h2>
+
+      <% if @move.pokemons.any? %>
+        <!-- table head -->
+        <div class="mt-4 w-full flex items-center justify-start font-semibold border-b border-gray-300">
+          <div class="mr-10">ID</div>
+          <div>Name</div>
+        </div>
+        <ul class="grid mt-4">
+          <% @move.pokemons.each do |pokemon| %>
+            <li class="w-full mb-4 flex items-center justify-start">
+              <div class="mr-10"><%= pokemon.id %></div>
+              <div><%= link_to pokemon.name, pokemon_path(pokemon), class: "text-blue-500 hover:underline" %></div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-600 mt-4">No Pokémon can make this move.</p>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-600">Move not found.</p>
+  <% end %>
+</section>
