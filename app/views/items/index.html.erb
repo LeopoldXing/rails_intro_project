@@ -1,3 +1,22 @@
 <section class="mt-12">
   <h1 class="mb-8 text-2xl font-bold tracking-tight text-gray-900 sm:text-6xl">Items</h1>
+  <!-- abilities list -->
+  <% if @items.any? %>
+    <!-- table head -->
+    <div class="mb-4 w-full flex items-center justify-start font-semibold border-b border-gray-300">
+      <div class="mr-10">ID</div>
+      <div>Name</div>
+    </div>
+    <!-- table content -->
+    <div class="grid">
+      <% @items.each do |item, index| %>
+        <div class="w-full mb-4 flex items-center justify-start">
+          <div class="mr-10"><%= item.id %></div>
+          <div><%= link_to item.name, item_path(item) %></div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No items found.</p>
+  <% end %>
 </section>

@@ -11,7 +11,7 @@
 require 'poke-api-v2'
 
 # Fetch a list of Pokémon
-pokemons = PokeApi.get(pokemon: { limit: 10 })
+pokemons = PokeApi.get(pokemon: { limit: 25 })
 
 # Initialize arrays to store unique abilities, moves, and items
 all_abilities = []
