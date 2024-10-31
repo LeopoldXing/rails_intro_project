@@ -3,7 +3,7 @@
 
   <!-- search bar -->
   <div class="mb-8 w-full">
-    <form action="<%= pokemon_index_path %>" method="get">
+    <form action="<%= root_path %>" method="get">
       <!-- search bar -->
       <div class="w-full flex items-center gap-4">
         <input type="text" name="keyword" placeholder="Search Pokémon by name..."
@@ -14,57 +14,45 @@
           Search
         </button>
       </div>
-    </form>
-    <!-- condition -->
-    <div class="flex-col justify-center items-center border-b border-gray-200">
-      <div class="w-full py-4 flex items-center justify-start">
-        <!-- ability -->
-        <div class="mx-4 pr-4 relative inline-block text-left border-r border-gray-200">
-          <%= render_dropdown_menu do %>
-            <%= dropdown_menu_trigger do %>
-              <%= render_button "Ability", variant: :ghost %>
-            <% end %>
-
-            <%= dropdown_menu_content do %>
-              <%= dropdown_menu_label "Ability" %>
-              <%= render_separator class: "my-1" %>
-              <%= dropdown_menu_item "ability 1" %>
-              <%= dropdown_menu_item "ability 2" %>
-            <% end %>
-          <% end %>
-        </div>
-        <!-- item -->
-        <div class="mr-4 pr-4 relative inline-block text-left border-r border-gray-200">
-          <%= render_dropdown_menu do %>
-            <%= dropdown_menu_trigger do %>
-              <%= render_button "Item", variant: :ghost %>
-            <% end %>
-
-            <%= dropdown_menu_content do %>
-              <%= dropdown_menu_label "Item" %>
-              <%= render_separator class: "my-1" %>
-              <%= dropdown_menu_item "item 1" %>
-              <%= dropdown_menu_item "item 2" %>
-            <% end %>
-          <% end %>
-        </div>
-        <!-- move -->
-        <div class="relative inline-block text-left">
-          <%= render_dropdown_menu do %>
-            <%= dropdown_menu_trigger do %>
-              <%= render_button "Move", variant: :ghost %>
-            <% end %>
-
-            <%= dropdown_menu_content do %>
-              <%= dropdown_menu_label "Move" %>
-              <%= render_separator class: "my-1" %>
-              <%= dropdown_menu_item "move 1" %>
-              <%= dropdown_menu_item "move 2" %>
-            <% end %>
-          <% end %>
+      <!-- condition bar -->
+      <div class="flex justify-between items-center border-b border-gray-200">
+        <div><%= @pokemons.size %> pokémon found</div>
+        <div>
+          <div class="w-full py-4 flex items-center justify-start">
+            <!-- Ability filter -->
+            <div class="pr-6 flex items-center justify-center gap-4 border-r border-gray-200">
+              <label for="ability_id" class="block text-sm font-medium text-gray-700">Ability</label>
+              <select name="ability_id" id="ability_id" class="block w-full p-2 border border-gray-300 rounded-md">
+                <option value="">All</option>
+                <% @abilities.each do |ability| %>
+                  <option value="<%= ability.id %>" <%= 'selected' if params[:ability_id].to_i == ability.id %>><%= ability.name %></option>
+                <% end %>
+              </select>
+            </div>
+            <!-- Item filter -->
+            <div class="ml-6 pr-6 flex items-center justify-center gap-4 border-r border-gray-200">
+              <label for="item_id" class="block text-sm font-medium text-gray-700">Item</label>
+              <select name="item_id" id="item_id" class="block w-full p-2 border border-gray-300 rounded-md">
+                <option value="">All</option>
+                <% @items.each do |item| %>
+                  <option value="<%= item.id %>" <%= 'selected' if params[:item_id].to_i == item.id %>><%= item.name %></option>
+                <% end %>
+              </select>
+            </div>
+            <!-- Move filter -->
+            <div class="ml-6 flex items-center justify-center gap-4">
+              <label for="move_id" class="block text-sm font-medium text-gray-700">Move</label>
+              <select name="move_id" id="move_id" class="block w-full p-2 border border-gray-300 rounded-md">
+                <option value="">All</option>
+                <% @moves.each do |move| %>
+                  <option value="<%= move.id %>" <%= 'selected' if params[:move_id].to_i == move.id %>><%= move.name %></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 
   <% if @pokemons.any? %>
@@ -100,3 +88,15 @@
     <p>No pokémon found.</p>
   <% end %>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const filters = document.querySelectorAll('#ability_id, #item_id, #move_id');
+
+    filters.forEach(filter => {
+      filter.addEventListener('change', function () {
+        this.form.submit();
+      });
+    });
+  });
+</script>
