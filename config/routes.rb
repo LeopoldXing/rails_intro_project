@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "moves/index"
   get "moves/show"
   get "abilities/index"
-  get "abilities/show"
+  get "abilities/:id", to: "abilities#show", as: :ability
   root "home#index"
   get "/about", to: "static_pages#about"
 
