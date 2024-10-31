@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get "pokemon/show"
+  get "items/index"
+  get "items/show"
+  get "moves/index"
+  get "moves/show"
+  get "abilities/index"
+  get "abilities/show"
   root "home#index"
   get "/about", to: "static_pages#about"
 
