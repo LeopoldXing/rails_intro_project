@@ -23,6 +23,8 @@ class HomeController < ApplicationController
       @pokemons = @pokemons.joins(:moves).where(moves: { id: params[:move_id] })
     end
 
-    @pokemons = @pokemons.distinct.order(:id)
+    @total = @pokemons.count
+
+    @pokemons = @pokemons.distinct.order(:id).page(params[:page]).per(10)
   end
 end

@@ -1,0 +1,49 @@
+<% if @pokemons.total_pages > 1 %>
+  <nav class="flex items-center justify-center mt-8" role="navigation" aria-label="pagination">
+
+    <!-- First Page Link -->
+    <% if @pokemons.current_page > 1 %>
+      <%= link_to 'First', url_for(page: 1), class: "px-3 py-1 mr-2 rounded-md border bg-gray-100 hover:bg-gray-200" %>
+    <% else %>
+      <span class="px-3 py-1 mr-2 rounded-md border bg-gray-200 text-gray-400 cursor-not-allowed">First</span>
+    <% end %>
+
+    <!-- Previous Page Link -->
+    <% if @pokemons.current_page > 1 %>
+      <%= link_to 'Previous', url_for(page: @pokemons.current_page - 1), class: "px-3 py-1 mr-4 rounded-md border bg-gray-100 hover:bg-gray-200" %>
+    <% else %>
+      <span class="px-3 py-1 mr-4 rounded-md border bg-gray-200 text-gray-400 cursor-not-allowed">Previous</span>
+    <% end %>
+
+    <!-- Display 5 pages around the current page -->
+    <div class="flex items-center justify-center gap-2">
+      <% total_pages = @pokemons.total_pages %>
+      <% current_page = @pokemons.current_page %>
+      <% starting_page = [current_page - 2, 1].max %>
+      <% ending_page = [starting_page + 4, total_pages].min %>
+      <% starting_page = [ending_page - 4, 1].max %>
+
+      <% starting_page.upto(ending_page) do |page| %>
+        <% if page == current_page %>
+          <span class="px-3 py-1 rounded-md border bg-blue-500 text-white"><%= page %></span>
+        <% else %>
+          <%= link_to page, url_for(page: page), class: "px-3 py-1 rounded-md border bg-gray-100 hover:bg-gray-200" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Next Page Link -->
+    <% if @pokemons.current_page < total_pages %>
+      <%= link_to 'Next', url_for(page: @pokemons.current_page + 1), class: "px-3 py-1 ml-4 rounded-md border bg-gray-100 hover:bg-gray-200" %>
+    <% else %>
+      <span class="px-3 py-1 ml-4 rounded-md border bg-gray-200 text-gray-400 cursor-not-allowed">Next</span>
+    <% end %>
+
+    <!-- Last Page Link -->
+    <% if @pokemons.current_page < total_pages %>
+      <%= link_to 'Last', url_for(page: total_pages), class: "px-3 py-1 ml-2 rounded-md border bg-gray-100 hover:bg-gray-200" %>
+    <% else %>
+      <span class="px-3 py-1 ml-2 rounded-md border bg-gray-200 text-gray-400 cursor-not-allowed">Last</span>
+    <% end %>
+  </nav>
+<% end %>

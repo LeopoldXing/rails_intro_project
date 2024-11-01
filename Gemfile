@@ -6,6 +6,8 @@ gem "poke-api-v2"
 gem "tailwindcss-rails", "~> 3.0"
 # shadcn ui
 gem "shadcn-ui", "~> 0.0.15"
+# pagination
+gem "kaminari"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1"
