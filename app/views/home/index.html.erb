@@ -86,7 +86,7 @@
     </ul>
     <!-- pagination -->
     <div class="mt-12 mb-24">
-      <%= paginate @pokemons %>
+      <%= render 'kaminari/paginator', collection: @pokemons %>
     </div>
   <% else %>
     <p>No pokémon found.</p>

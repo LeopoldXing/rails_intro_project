@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = Item.order(:name).page(params[:page]).per(10)
   end
 
   def show
