@@ -1,22 +1,120 @@
-<section class="mt-12">
-  <h1 class="mb-8 text-2xl font-bold tracking-tight text-gray-900 sm:text-6xl">About Us</h1>
+<section class="mt-12 pb-24">
+  <h1 class="mb-8 text-2xl font-bold tracking-tight text-gray-900 sm:text-6xl">About Pokémon WiKi</h1>
+
   <p class="mt-4 text-gray-700">
-    Welcome to <strong>Pokémon WiKi</strong>! We are dedicated to providing the most comprehensive and up-to-date Pokémon information and
-    resources for fans. Whether you're a novice trainer or a seasoned player, you can find everything you need here.
+    Welcome to <strong>Pokémon WiKi</strong>! This website is my Rails Intro Project for the Web Dev 3 course at Red River College.
+  </p>
+
+  <h2 class="mt-8 text-xl font-semibold text-gray-900">Project Overview</h2>
+  <p class="mt-4 text-gray-700">
+    In this project, I used four data sources from the same API to get all the information needed. I used the Gem
+    <a href="https://github.com/rdavid1099/poke-api-v2" class="text-blue-500 hover:underline">poke-api-v2</a> to access the data.
+  </p>
+
+  <h3 class="mt-6 text-lg font-semibold text-gray-900">Data Source 1: Pokémon</h3>
+  <p class="mt-2 text-gray-700">
+    This data source gives detailed information about Pokémon, like their abilities, base experience, height, weight, moves, stats, types,
+    and more. By default, it returns 20 Pokémon per query, but I can adjust it by adding a "limit" parameter.
   </p>
   <p class="mt-2 text-gray-700">
-    Our website includes the following content:
+    I stored this data in a <code>pokemons</code> table in my database. It has the following columns:
   </p>
-  <ul class="list-disc list-inside mt-2 text-gray-700">
-    <li>Detailed Pokédex, including attributes, skills, evolution chains, and more.</li>
-    <li>The latest game guides and event information to help you gain an advantage on your adventure.</li>
-    <li>Pokémon-related news and updates to keep you informed on official happenings.</li>
+  <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+    <li><code>id</code>: Unique identifier for each Pokémon.</li>
+    <li><code>name</code>: Name of the Pokémon.</li>
+    <li><code>base_experience</code>: The base experience points given when the Pokémon is defeated.</li>
+    <li><code>height</code> and <code>weight</code>: Physical size of the Pokémon.</li>
+    <li><code>is_default</code>: Indicates if this is the default form of the Pokémon.</li>
+    <li><code>order_num</code>: The order for sorting, often used to group families of Pokémon.</li>
+    <li><code>type1</code> and <code>type2</code>: The primary and secondary types of the Pokémon.</li>
+    <li><code>created_at</code> and <code>updated_at</code>: Timestamps for record tracking.</li>
+  </ul>
+
+  <h3 class="mt-6 text-lg font-semibold text-gray-900">Data Source 2: Pokémon Abilities</h3>
+  <p class="mt-2 text-gray-700">
+    This endpoint gives information about the different abilities that Pokémon can have, including effect entries and flavor text.
+  </p>
+  <p class="mt-2 text-gray-700">
+    I stored this data in an <code>abilities</code> table with the following columns:
+  </p>
+  <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+    <li><code>id</code>: Unique identifier for each ability.</li>
+    <li><code>name</code>: Name of the ability.</li>
+    <li><code>created_at</code> and <code>updated_at</code>: Timestamps.</li>
   </ul>
   <p class="mt-2 text-gray-700">
-    Our team consists of a group of passionate Pokémon fans dedicated to creating a platform for interaction and sharing. If you have any
-    suggestions or feedback, feel free to reach out to us via our contact page.
+    To represent the many-to-many relationship between Pokémon and abilities, I created a join table called <code>pokemon_abilities</code>:
   </p>
+  <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+    <li><code>id</code></li>
+    <li><code>pokemon_id</code>: References a Pokémon.</li>
+    <li><code>ability_id</code>: References an ability.</li>
+    <li><code>is_hidden</code>: Indicates if the ability is hidden.</li>
+    <li><code>slot</code>: The slot number of the ability.</li>
+    <li><code>created_at</code> and <code>updated_at</code></li>
+  </ul>
+
+  <h3 class="mt-6 text-lg font-semibold text-gray-900">Data Source 3: Pokémon Moves</h3>
+  <p class="mt-2 text-gray-700">
+    This data source provides information about the moves that Pokémon can learn, including their power, accuracy, PP (Power Points),
+    priority, and type.
+  </p>
+  <p class="mt-2 text-gray-700">
+    I stored this data in a <code>moves</code> table with these columns:
+  </p>
+  <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+    <li><code>id</code></li>
+    <li><code>name</code></li>
+    <li><code>pp</code>: Number of times the move can be used.</li>
+    <li><code>priority</code>: Determines the order of move execution.</li>
+    <li><code>move_type</code>: The type of the move (e.g., "fire", "water").</li>
+    <li><code>created_at</code> and <code>updated_at</code></li>
+  </ul>
+  <p class="mt-2 text-gray-700">
+    The relationship between Pokémon and moves is also many-to-many, represented by the <code>pokemon_moves</code> table:
+  </p>
+  <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+    <li><code>id</code></li>
+    <li><code>pokemon_id</code></li>
+    <li><code>move_id</code></li>
+    <li><code>level_learned_at</code>: The level when the Pokémon learns the move.</li>
+    <li><code>move_learn_method</code>: How the move is learned (e.g., level-up, TM).</li>
+    <li><code>created_at</code> and <code>updated_at</code></li>
+  </ul>
+
+  <h3 class="mt-6 text-lg font-semibold text-gray-900">Data Source 4: Pokémon Items</h3>
+  <p class="mt-2 text-gray-700">
+    This endpoint provides information about items that Pokémon can hold, including their cost, effects, and attributes.
+  </p>
+  <p class="mt-2 text-gray-700">
+    I stored this data in an <code>items</code> table with the following columns:
+  </p>
+  <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+    <li><code>id</code></li>
+    <li><code>name</code></li>
+    <li><code>cost</code>: The purchase price of the item.</li>
+    <li><code>fling_power</code>: The item's power when used with the move Fling.</li>
+    <li><code>created_at</code> and <code>updated_at</code></li>
+  </ul>
+  <p class="mt-2 text-gray-700">
+    The <code>pokemon_items</code> table represents the many-to-many relationship between Pokémon and items:
+  </p>
+  <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+    <li><code>id</code></li>
+    <li><code>pokemon_id</code></li>
+    <li><code>item_id</code></li>
+    <li><code>version</code>: The game version where the item is available.</li>
+    <li><code>rarity</code>: How rare the item is.</li>
+    <li><code>created_at</code> and <code>updated_at</code></li>
+  </ul>
+
+  <h2 class="mt-8 text-xl font-semibold text-gray-900">Database Relationships</h2>
   <p class="mt-4 text-gray-700">
-    Thank you for your support, and may you find great joy in the world of Pokémon!
+    My database uses several many-to-many relationships to link Pokémon with their abilities, moves, and items. Here is my
+    ERD diagram:
   </p>
+
+  <div class="mt-4">
+    <img src="<%= asset_path('Rails_Intro_Project_ERD.png') %>" alt="Database ERD" class="w-full h-auto">
+  </div>
 </section>
