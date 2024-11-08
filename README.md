@@ -1,24 +1,45 @@
-# README
+# Pokémon Wiki
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the Intro project for _Agile Full Stack Web Development_ course of **Red River College**
 
-Things you may want to cover:
+## Project setup
+### 1. clone this repo
+```shell
+git clone https://github.com/LeopoldXing/rails_intro_project
+```
 
-* Ruby version
+### 2. cd into the project
+```shell
+cd rails_intro_project
+```
 
-* System dependencies
+### 3. install dependencies
+```shell
+gem install bundler
+bundle install
+```
 
-* Configuration
+### 4. setup database
+#### create PostgreSQL database
+```shell
+docker compose up -d
+```
 
-* Database creation
+#### insert sample data
+This might take 5 - 10 min to complete.
+```shell
+rails db:seed
+```
 
-* Database initialization
+### 5. compile tailwindcss
+```shell
+rails tailwindcss:build
+```
 
-* How to run the test suite
+### 6. launch application
+```shell
+rails s
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### 7. complete
+now you can access the project in http://localhost:3000
